@@ -1,0 +1,73 @@
+Factoring via the Elliptic Curve Method
+---------------------------------------
+
+
+Included in this package is an implementation of the elliptic curve method
+for factoring integers.  This implementation is intended to be called from
+inside a program supplied by the user; however, a sample program, 
+ecm-test.cpp, is included.
+
+
+COMPILING:
+
+To make this software, do the following:
+
+(1) Edit Makefile to ensure that NTLPREFIX is correctly set.
+(2) Type 'make'.
+
+Note: for (1), if the NTL header files are located in /opt/local/include/NTL/
+and the library is named /opt/local/lib/libntl.a, then NTLPREFIX should be 
+set to /opt/local.
+
+Note: for best results, compile NTL to use GMP as its underlying large integer
+package (LIP).  The Makefile assumes you have done this.  If you aren't using
+GMP, you may need to remove the '-lgmp' from the NTLLIB line.
+
+
+INTERFACE:
+
+Please read the header file ZZFactoring.h and examine the program ecm-test.cpp
+to learn how to use of the interface.  The essential points are:
+
+1. Include the header file ZZFactoring.h.
+
+2. Declare variables for the factoriation (of type vec_pair_ZZ_long) and the
+   integer to factor (of type ZZ).
+
+3. Call factor(factorization,n) to do the factoring.
+
+
+CHOICE OF INTEGER:
+
+Any integer can be chosen but composites that are the product of 2 or more
+large factors will be the most difficult (take the most time) to factor.  
+
+If you are interested in testing for smoothness, read the header file
+ZZFactoring.h to learn how to get factor() to stop after the small factors
+have been found.
+
+
+PERFORMANCE:
+
+The algorithm has been optimized on an Athalon XP1700 machine with 256MB
+of RAM so it should be as fast as it can be on any similar machine.  
+
+The following table lists the time required to find factors of the specified
+size (on average using the Athalon XP1700 machine described above):
+
+   48 bit factor:    5 seconds
+   64 bit factor:  1.5 minutes
+   80 bit factor:   20 minutes
+   96 bit factor:  3.5 hours
+  112 bit factor:   30 hours
+
+Note that the time required to find a factor depends almost entirely on the
+size of the factor to be found and very little on the size of the number 
+itself.  During optimization, integers as large as 500 bits were factored.
+
+
+
+Questions, comments, problems, or other concerns can be emailed to:
+  chris.studholme@utoronto.ca
+
+-- END OF README --
