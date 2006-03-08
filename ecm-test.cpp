@@ -1,8 +1,8 @@
-#include <stdio.h>
+#include <iostream>
 #include <time.h>
-
 #include "ZZFactoring.h"
 
+using namespace NTL;
 
 // multiply out factorization to get n
 void mul(ZZ& n, const vec_pair_ZZ_long& factorization) {
@@ -38,15 +38,15 @@ int main(int argc, char* argv[]) {
   // factor count integers
   for (long i=0; i<count; ++i) {
     RandomBits(n,bits);
-    cout<<"n="<<n<<endl;
+    std::cout<<"n="<<n<<std::endl;
     factor(factorization,n,ZZ::zero(),0,verbose);
-    cout<<factorization<<endl;
+    std::cout<<factorization<<std::endl;
     mul(nc,factorization);
     if (n!=nc) {
-      cout<<"check="<<nc<<endl;
+      std::cout<<"check="<<nc<<std::endl;
       Error("FAILED FACTORIZATION");
     }
-    cout<<endl;
+    std::cout<<std::endl;
     end = GetTime();
     if (end-prev<min) min=end-prev;
     if (end-prev>max) max=end-prev;
@@ -55,8 +55,9 @@ int main(int argc, char* argv[]) {
 
   // display statistics
   if (min<0) min=0;
-  cout<<"min="<<min<<"  avg="<<((end-start)/count)<<"  max="<<max
-      <<"  (seconds)"<<endl;
+  std::cout<<"min="<<min<<"  avg="<<((end-start)/count)<<"  max="<<max
+	   <<"  (seconds)"<<std::endl;
 
   return 0;
 }
+

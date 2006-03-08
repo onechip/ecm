@@ -7,6 +7,7 @@
  * Copyright:  GPL (http://www.fsf.org/copyleft/gpl.html)
  */
 
+NTL_START_IMPL;
 
 /**************** EC_pCurve methods ****************/
 
@@ -828,3 +829,4 @@ void mul(EC_p& x, const EC_p& a, long n) {
   swap(x,result);
 }
 
+NTL_END_IMPL;

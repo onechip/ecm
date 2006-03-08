@@ -2,9 +2,10 @@
 #define NTL_EC_p__H
 
 #include <NTL/ZZ_pX.h>
+#include <ostream>
 
 /*
-Copyright (C) 2003 Chris Studholme
+Copyright (C) 2006 Chris Studholme
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -33,6 +34,7 @@ SUMMARY:
 
 #define NTLX_OPT_RETURN(T,x) return x
 
+NTL_OPEN_NNS;
 
 // classes defined here
 class EC_pCurve;
@@ -72,7 +74,7 @@ public:
   static const long JACOBIAN;
   static const long MONTGOMERY;
 
-  friend EC_p;
+  friend class EC_p;
   friend void conv(EC_pCurve&, const ZZ_pX&);
 
 public:  // should be protected
@@ -154,7 +156,7 @@ protected:
   static EC_pCurve* c;
   static EC_p* inf;
 
-  friend EC_pBak;
+  friend class EC_pBak;
 
 public:
   // coordinates of point (see c.rep for point representation)
@@ -247,8 +249,8 @@ inline bool operator!=(const EC_p& a, const EC_p& b) {
 
 
 // stream operators
-ostream& operator<<(ostream&, const EC_pCurve&);
-ostream& operator<<(ostream&, const EC_p&);
+std::ostream& operator<<(std::ostream&, const EC_pCurve&);
+std::ostream& operator<<(std::ostream&, const EC_p&);
 
 
 // random point
@@ -339,5 +341,6 @@ private:
 };
 
 
+NTL_CLOSE_NNS;
 
 #endif

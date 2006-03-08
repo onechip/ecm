@@ -4,8 +4,8 @@ Factoring via the Elliptic Curve Method
 
 Included in this package is an implementation of the elliptic curve method
 for factoring integers.  This implementation is intended to be called from
-inside a program supplied by the user; however, a sample program, 
-ecm-test.cpp, is included.
+inside a program supplied by the user; however, two sample programs, 
+ecm-test and factor, are included.
 
 
 COMPILING:

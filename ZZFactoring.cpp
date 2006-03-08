@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <string.h>
+#include <cmath>
 
 #include <NTL/RR.h>
 #include <NTL/ZZ_p.h>
@@ -145,27 +144,27 @@ void ECM_parameters(long& B1, long& B2, double& prob, long& D,
   B2 = b2<NTL_SP_BOUND ? (long)b2 : NTL_SP_BOUND;
 
   // memory use in stage 2 is 3*D*nbits/8
-  D = (long)sqrt((B2-B1)/2);
+  D = (long)sqrt((B2-B1)/2.0);
   if (2*D>=B1) D = (B1-1)/2;
   if (D<2) D=2;
 
   // all curve orders are divisible by 12
-  logp-=log(12); 
+  logp-=log(12.0); 
 
   // probability that curve order is B1-smooth
-  double logB1 = log(B1);
+  double logB1 = log((double)B1);
   double u = logp/logB1;
-  prob = pow(u,-u);
+  prob = std::pow(u,-u);
   // add in probability that order has one larger factor (up to B2)
   // numerical integration: time is O(log(B2/B1))
   long min_x = B1;
-  double min_y = pow(u-1,1-u)/logB1/B1;
+  double min_y = std::pow(u-1,1-u)/logB1/B1;
   while (min_x<B2) {
     long max_x = 2*min_x;
     if (max_x>B2 || min_x>max_x) max_x=B2;
-    double logx = log(max_x);
+    double logx = log((double)max_x);
     double v = logx/logB1;
-    double max_y = pow(u-v,v-u)/logx/max_x;
+    double max_y = std::pow(u-v,v-u)/logx/max_x;
     prob += (max_x-min_x)*(min_y+max_y)/2;
     min_x = max_x;
     min_y = max_y;
@@ -175,7 +174,7 @@ void ECM_parameters(long& B1, long& B2, double& prob, long& D,
 
 // returns a non-trivial factor q of ZZ_p::modulus(), or 1 otherwise
 void ECM_stage_one(ZZ& q, EC_p& Q, PrimeSeq& seq, long bound) {
-  long sbound = (long)sqrt(bound);
+  long sbound = (long)sqrt((double)bound);
   seq.reset(0);
   long p = seq.next();
   for (; p<=sbound; p=seq.next()) {
