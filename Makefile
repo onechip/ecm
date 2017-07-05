@@ -11,7 +11,7 @@ CXXFLAGS        = $(PREFFLAGS) $(NTLINCLUDE)
 LINKFLAGS       = $(NTLLIB)
 
 ALL_PROGS	= ecm-test factor
-COMMON_OBJS	= EC_p.o pair_ZZ_long.o ZZFactoring.o
+COMMON_OBJS	= EC_p.o ZZFactoring.o
 COMMON_HEADERS	=
 ALL_DIRS	=
 

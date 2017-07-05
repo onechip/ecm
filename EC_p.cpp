@@ -60,7 +60,7 @@ ostream& operator<<(ostream& stream, const EC_pCurve& curve) {
 EC_pCurve* EC_p::c = NULL;
 EC_p* EC_p::inf = NULL;
 
-EC_p::EC_p() : Y(ZZ_p_NoAlloc),Z(ZZ_p_NoAlloc) {
+EC_p::EC_p() : Y(INIT_NO_ALLOC),Z(INIT_NO_ALLOC) {
   switch (c->rep) {
   case EC_pCurve::AFFINE:
     Y._ZZ_p__rep.SetSize(ZZ_p::ModulusSize());
