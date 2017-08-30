@@ -336,10 +336,10 @@ void ECM(ZZ& q, const ZZ& N, long ncurves, long B1, long B2, long D,
   for (long i=0; i<ncurves; ++i) {
     if (verbose) {
       if (ncurves<NTL_MAX_LONG)
-	cout<<"ECM: "<<NumBits(N)<<" bits; "
+	std::cout<<"ECM: "<<NumBits(N)<<" bits; "
 	    <<i<<"/"<<ncurves<<" curves\r"<<flush;
       else
-	cout<<"ECM: "<<NumBits(N)<<" bits; "
+	std::cout<<"ECM: "<<NumBits(N)<<" bits; "
 	    <<i<<" curves\r"<<flush;
     }
 
@@ -347,14 +347,14 @@ void ECM(ZZ& q, const ZZ& N, long ncurves, long B1, long B2, long D,
     ECM_one_curve(q,seq,B1,B2,D);
     if (!IsOne(q)) {
       if (verbose) {
-	cout<<"ECM: "<<NumBits(N)<<" bits; "
-	    <<(i+1)<<" curves; found "<<q<<"  "<<endl;
+	std::cout<<"ECM: "<<NumBits(N)<<" bits; "
+             <<(i+1)<<" curves; found "<<q<<"  "<<std::endl;
       }
       return;
     }
   }
   if (verbose)
-    cout<<"ECM: "<<NumBits(N)<<" bits; FAILED!        "<<endl;
+    std::cout<<"ECM: "<<NumBits(N)<<" bits; FAILED!        "<<std::endl;
   set(q);
 }
 
@@ -371,13 +371,13 @@ void ECM(ZZ& q, const ZZ& n, const ZZ& _bnd, double failure_prob,
   double prob;
   ECM_parameters(B1,B2,prob,D,NumBits(bnd),NumBits(n));
   if (verbose)
-    cout<<"ECM: bnd="<<NumBits(bnd)<<"bits  B1="<<B1<<"  B2="<<B2
-	<<"  D="<<D<<"  prob="<<prob<<endl;
+    std::cout<<"ECM: bnd="<<NumBits(bnd)<<"bits  B1="<<B1<<"  B2="<<B2
+             <<"  D="<<D<<"  prob="<<prob<<std::endl;
   
   if (failure_prob<=0) {
     // run "forever"
     if (verbose)
-      cout<<"ECM: expected ncurves="<<(1/prob)<<endl;
+      std::cout<<"ECM: expected ncurves="<<(1/prob)<<std::endl;
     ECM(q,n,NTL_MAX_LONG,B1,B2,D,verbose); 
   }
   else if (failure_prob>=1) {
@@ -395,8 +395,8 @@ void ECM(ZZ& q, const ZZ& n, const ZZ& _bnd, double failure_prob,
     long ncurves = ncurves_d<=1 ? 1 :
       (ncurves_d>=NTL_MAX_LONG ? NTL_MAX_LONG : (long)ncurves_d);
     if (verbose)
-      cout<<"ECM: good_prob="<<prob<<"  failure_prob="<<failure_prob
-	  <<"  ncurves="<<ncurves<<endl;
+      std::cout<<"ECM: good_prob="<<prob<<"  failure_prob="<<failure_prob
+               <<"  ncurves="<<ncurves<<std::endl;
     ECM(q,n,ncurves,B1,B2,D,verbose); 
   }
 }
