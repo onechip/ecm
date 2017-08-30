@@ -337,10 +337,10 @@ void ECM(ZZ& q, const ZZ& N, long ncurves, long B1, long B2, long D,
     if (verbose) {
       if (ncurves<NTL_MAX_LONG)
 	std::cout<<"ECM: "<<NumBits(N)<<" bits; "
-	    <<i<<"/"<<ncurves<<" curves\r"<<flush;
+	    <<i<<"/"<<ncurves<<" curves\r"<<std::flush;
       else
 	std::cout<<"ECM: "<<NumBits(N)<<" bits; "
-	    <<i<<" curves\r"<<flush;
+	    <<i<<" curves\r"<<std::flush;
     }
 
     // try to find a factor
